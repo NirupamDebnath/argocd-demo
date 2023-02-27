@@ -1,17 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ms-elasticsearch
+  name: ms-nginx
   namespace: argocd
 spec:
   destination:
-    namespace: elasticsearch
+    namespace: nginx
     server: "https://kubernetes.default.svc"
   project: default
   source:
-    path: efk-singlenode
+    path: nginx-helm
     repoURL: "https://github.com/NirupamDebnath/argocd-demo.git"
     targetRevision: main
+    helm:
+      releaseName: argocd-helm-release
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
