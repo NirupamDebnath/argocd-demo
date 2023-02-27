@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ms-elasticsearch
+  namespace: argocd
+spec:
+  destination:
+    namespace: elasticsearch
+    server: "https://kubernetes.default.svc"
+  project: default
+  source:
+    path: efk-singlenode
+    repoURL: "https://github.com/NirupamDebnath/argocd-demo.git"
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
